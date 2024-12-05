@@ -6,7 +6,7 @@ import coverPhoto from "../Assests/userDummyCoverPhoto.svg";
 import backArrow from "../Assests/backArrow.svg";
 import pencil from "../Assests/pencil.svg";
 import { db, storage } from "../Services/Firebase";
-const UserProfile = () => {
+const EditProfile = () => {
     const context = useContext(AppContext);
     const [userInput, setUserInput] = useState({});
     const [coverPhotoFile, setCoverPhotoFile] = useState(null);
@@ -114,4 +114,4 @@ const UserProfile = () => {
     );
 };
 
-export default UserProfile;
+export default EditProfile;
