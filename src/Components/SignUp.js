@@ -3,7 +3,7 @@ import googleLogo from '../Assests/google.svg'
 import background from "../Assests/backgroung.svg"
 import { signInWithPopup } from 'firebase/auth'
 import { auth, googleProvider } from '../Services/Firebase'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { AppContext } from '../Context/AppContextProvider'
 const SignUp = () => {
     const context = useContext(AppContext)
@@ -18,11 +18,32 @@ const SignUp = () => {
         try {
             const result = await signInWithPopup(auth, googleProvider);
             const user = result.user;
-            setUserInfo(user)
+            if (user) {
+                window.sessionStorage.setItem("user", JSON.stringify(user));
+                setUserInfo(user)
+                const currentDate = new Date().getTime();
+                window.sessionStorage.setItem("lastLoginDate", currentDate);
+
+            }
         } catch (error) {
             console.error("Error during sign-in:", error);
         }
     };
+
+    useEffect(() => {
+        const lastLoginDate = window.sessionStorage.getItem("lastLoginDate");
+
+        if (lastLoginDate) {
+            const currentDate = new Date().getTime();
+            const sevenDaysInMilliseconds = 7 * 24 * 60 * 60 * 1000;
+
+            if (currentDate - lastLoginDate > sevenDaysInMilliseconds) {
+                window.sessionStorage.clear();
+            }
+        }
+    }, []);
+
+
     return (
         <>
             <div className="h-[100vh]">
