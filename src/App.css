@@ -8,6 +8,13 @@
         animation: App-logo-spin infinite 20s linear;
     }
 }
+.no-scroll {
+    overflow: hidden;
+}
+.no-pointer-events {
+    pointer-events: none;
+}
+
 
 .App-header {
     background-color: #282c34;
