@@ -70,7 +70,7 @@ const FeedPosts = () => {
                     key={post.id}
                     className="border w-auto mr-[1rem] relative px-[0.75rem] h-[21.3rem] mb-[10px] rounded-[1.6rem] bg-[#F7EBFF] flex flex-col"
                 >
-                    <div className="flex items-center h-[3.125rem] ml-[0.75rem] mt-[0.75rem]">
+                    <div className="flex items-center h-[3.125rem]  mt-[0.75rem]">
                         <img
                             src={userInfo?.photoURL}
                             alt="dp"

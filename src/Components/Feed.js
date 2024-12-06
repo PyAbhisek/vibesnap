@@ -12,7 +12,7 @@ const Feed = () => {
     const { userInfo } = context;
     return (
         <>
-            <div className="flex items-center h-[3.125rem] ml-[1rem] mt-[1rem] ">
+            <div onClick={() => { navigate("/profile") }} className="flex items-center h-[3.125rem] ml-[1rem] mt-[1rem] ">
                 <img src={userInfo?.photoURL} alt="dp" className="w-[3.125rem] h-[3.125rem] rounded-full" />
                 <div className="ml-[0.625rem] flex flex-col   ">
                     <p className="text-[0.625rem] leading-[0.77rem] font-kumbh text-[#00000054]">Welcome Back,</p>
