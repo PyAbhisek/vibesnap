@@ -25,7 +25,7 @@ const UserProfile = () => {
             <div className="flex flex-col">
                 <div className="w-[100%] relative h-[30%] rounded-b-[1.25rem]">
                     <img src={userInfo.coverPhotoURL || coverPhoto} alt="coverPhoto" className="h-[30%] w-[100%]" />
-                    <button className="absolute top-[1.5rem] left-[1.4rem] flex" onClick={() => console.log("Back to profile")}>
+                    <button className="absolute top-[1.5rem] left-[1.4rem] flex" onClick={() => navigate("/feed")}>
                         <img src={backArrow} alt="backArrow" className="w-[1.6rem] h-auto" />
                     </button>
                     <div className="absolute bottom-[-20.5%] z-[101] left-[1rem]">
