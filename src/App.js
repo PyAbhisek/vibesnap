@@ -1,9 +1,10 @@
 import './App.css';
 import SignUp from './Components/SignUp';
 import EditProfile from './Components/EditProfile';
+import UserProfile from './Components/UserProfile';
 import { useContext, useEffect } from 'react';
 import { AppContext } from './Context/AppContextProvider';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
 function App() {
   const context = useContext(AppContext);
@@ -12,6 +13,8 @@ function App() {
   }
   const { userInfo, setUserInfo } = context;
   const navigate = useNavigate();
+  const location = useLocation();
+
   const isUserLoggedIn = Object.keys(userInfo).length > 0;
 
   useEffect(() => {
@@ -20,7 +23,6 @@ function App() {
       const user = JSON.parse(storedUser);
       setUserInfo(user);
     }
-
 
     const lastLoginDate = window.sessionStorage.getItem("lastLoginDate");
     if (lastLoginDate) {
@@ -34,16 +36,17 @@ function App() {
   }, [setUserInfo]);
 
   useEffect(() => {
-    if (isUserLoggedIn) {
+    if (isUserLoggedIn && location.pathname === '/') {
       navigate('/profile');
     }
-  }, [isUserLoggedIn, navigate]);
+  }, [isUserLoggedIn, location.pathname, navigate]);
 
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={!isUserLoggedIn ? <SignUp /> : <EditProfile />} />
-        <Route path="/profile" element={isUserLoggedIn ? <EditProfile /> : <SignUp />} />
+        <Route path="/profile" element={isUserLoggedIn ? <UserProfile /> : <SignUp />} />
+        <Route path="/editprofile" element={isUserLoggedIn ? <EditProfile /> : <SignUp />} />
       </Routes>
     </div>
   );

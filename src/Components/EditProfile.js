@@ -6,12 +6,14 @@ import coverPhoto from "../Assests/userDummyCoverPhoto.svg";
 import backArrow from "../Assests/backArrow.svg";
 import pencil from "../Assests/pencil.svg";
 import { db, storage } from "../Services/Firebase";
+import { useNavigate } from "react-router-dom";
 const EditProfile = () => {
     const context = useContext(AppContext);
     const [userInput, setUserInput] = useState({});
     const [coverPhotoFile, setCoverPhotoFile] = useState(null);
     const [profilePhotoFile, setProfilePhotoFile] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate()
 
     if (!context) {
         throw new Error("AppContext must be used within a AppContextProvider");
@@ -62,7 +64,7 @@ const EditProfile = () => {
             <div className="flex flex-col">
                 <div className="w-[100%] relative h-[30%] rounded-b-[1.25rem]">
                     <img src={userInfo.coverPhotoURL || coverPhoto} alt="coverPhoto" className="h-[30%] w-[100%]" />
-                    <button className="absolute top-[1.5rem] left-[1.4rem] flex" onClick={() => console.log("Back to profile")}>
+                    <button className="absolute top-[1.5rem] left-[1.4rem] flex" onClick={() => navigate("/profile")}>
                         <img src={backArrow} alt="backArrow" className="w-[1.6rem] h-auto" />
                         <p className="font-extrabold font-karla leading-[1.46rem] text-[1.25rem] text-white ml-[0.8rem]">Edit Profile</p>
                     </button>
