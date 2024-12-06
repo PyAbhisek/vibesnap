@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react"
 import { AppContext } from "../Context/AppContextProvider";
-
+import filledHearIcon from "../Assests/filledHearIcon.svg"
+import shareIcon from "../Assests/shareIcon.svg"
 const FeedPosts = () => {
     const [postData, setPostData] = useState([]);
     const [page, setPage] = useState(1);
@@ -59,12 +60,15 @@ const FeedPosts = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [hasMore, loading]);
 
+    const share = () => {
+        console.log("sahre")
+    }
     return (
         <div>
             {postData.map((post, index) => (
                 <div
                     key={post.id}
-                    className="border w-auto mr-[1rem] h-[21.3rem] mb-[10px] rounded-[1.6rem] bg-[#F7EBFF] flex flex-col"
+                    className="border w-auto mr-[1rem] relative px-[0.75rem] h-[21.3rem] mb-[10px] rounded-[1.6rem] bg-[#F7EBFF] flex flex-col"
                 >
                     <div className="flex items-center h-[3.125rem] ml-[0.75rem] mt-[0.75rem]">
                         <img
@@ -81,7 +85,7 @@ const FeedPosts = () => {
                             </p>
                         </div>
                     </div>
-                    <div className="mx-[0.75rem] mt-[0.87rem]">
+                    <div className=" mt-[0.87rem]">
                         <p className="text-[0.75rem] font-kumbh leading-[0.93rem]">
                             {post.title}
                         </p>
@@ -91,6 +95,27 @@ const FeedPosts = () => {
                     </div>
 
                     <div>
+                        <img
+                            src={userInfo?.photoURL}
+                            alt="dp"
+                            className="w-[19rem] h-[10.5rem] rounded-[0.75rem]"
+                        />
+                    </div>
+
+                    <div className="mt-[1rem] flex  items-center">
+                        <img
+                            src={filledHearIcon}
+                            alt="dp"
+                            className="w-[1.1rem] "
+                        />
+                        <p className="ml-[0.25rem] font-kumbh font-semibold text-[0.75rem] leading-[0.93rem] text-[#D95B7F] ">{post?.reactions?.likes}</p>
+                    </div>
+                    <div onClick={share}
+                        className=" absolute bottom-[0.75rem] right-[0.75rem] flex bg-[#00000012] rounded-[1.8rem] py-[0.43rem] px-[1.1rem]">
+                        <img src={shareIcon} alt="share" className="w-[1rem]" />
+                        <div className=" w-[25%]  text-[0.875rem] font-karla font-semibold leading-[1rem] ml-[4px]  ">
+                            Share
+                        </div>
                     </div>
                 </div>
             ))}
