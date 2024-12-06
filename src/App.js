@@ -6,6 +6,7 @@ import { useContext, useEffect } from 'react';
 import { AppContext } from './Context/AppContextProvider';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import Feed from './Components/Feed';
+import CreatePost from './Components/CreatePost';
 
 function App() {
   const context = useContext(AppContext);
@@ -49,6 +50,7 @@ function App() {
         <Route path="/profile" element={isUserLoggedIn ? <UserProfile /> : <SignUp />} />
         <Route path="/editprofile" element={isUserLoggedIn ? <EditProfile /> : <SignUp />} />
         <Route path="/feed" element={isUserLoggedIn ? <Feed /> : <SignUp />} />
+        <Route path="/createpost" element={isUserLoggedIn ? <CreatePost /> : <SignUp />} />
       </Routes>
     </div>
   );

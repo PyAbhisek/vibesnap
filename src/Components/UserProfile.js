@@ -18,7 +18,7 @@ const UserProfile = () => {
         navigate('/editProfile');
     }
     const newPost = () => {
-        console.log("new post")
+        navigate("/createpost")
     }
     return (
         <>
@@ -53,6 +53,7 @@ const UserProfile = () => {
                     </div>
                 </div>
             </div>
+
         </>
     )
 }
