@@ -1,56 +1,65 @@
-import React, { useState, useEffect } from 'react';
 
+import {
+    collection,
+    getDocs,
+} from 'firebase/firestore';
+import { db } from "../Services/Firebase";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "../Context/AppContextProvider";
+import heartIcon from "../Assests/greyHeart.svg"
 const PostsSection = () => {
-    const [posts, setPosts] = useState([]);
+    const context = useContext(AppContext);
+    const [userFeed, setUserFeed] = useState([])
+    if (!context) {
+        throw new Error("AppContext must be used within a AppContextProvider");
+    }
+
+    const { userInfo } = context;
+    const fetchPosts = async () => {
+        try {
+            const userPostsRef = collection(db, 'users', userInfo.uid, 'posts');
+            const snapshot = await getDocs(userPostsRef);
+            const postData = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            setUserFeed(postData)
+            console.log(postData, "postData")
+        } catch (error) {
+            console.error("Error fetching posts:", error);
+        }
+    };
 
     useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const response = await fetch('/api/posts');
-                const data = await response.json();
-                setPosts(data);
-            } catch (error) {
-                console.error('Error fetching posts:', error);
-            }
-        };
-
         fetchPosts();
     }, []);
 
     return (
-        <div className="grid grid-cols-2 gap-4 border h-[50vh]">
-            {posts.map((post, index) => (
-                <div
-                    key={index}
-                    className="bg-white rounded-lg shadow-md overflow-hidden"
-                >
-                    {post.type === 'design-meet' && (
-                        <div className="relative h-48">
-                            <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
-                            <div className="absolute top-4 left-4 bg-white py-1 px-2 rounded-full text-sm">
-                                1/2
+        <div className="grid grid-cols-2 gap-[0.75rem] mt-[0.68rem] bg-gray-50">
+            {userFeed.map((i) => {
+                return (
+                    <div className=" relative w-full h-[15rem] rounded-[0.75rem] bg-[#8f8f8f]">
+                        {i.mediaFiles.length > 0 && (
+                            <div className="absolute top-2 right-2 z-10 bg-white bg-opacity-60 text-black w-auto h-auto px-[7px] py-[3px] rounded-[0.6rem] text-sm font-semibold">
+                                1 / {i.mediaFiles.length}
                             </div>
+                        )}
+
+                        <p className=' max-w-[80%] truncate absolute bottom-[2rem] left-[0.75rem]  text-white text-[0.875rem] font-semibold font-kumbh leading-[1rem]'>
+                            {i.description}
+                        </p>
+
+                        <div className=' flex  absolute bottom-[0.75rem] left-[0.75rem]  text-[#706e6e] text-[0.875rem] font-semibold font-kumbh leading-[1rem]'>
+                            {i.likes > 0 && <img src={heartIcon} alt="hearticon" className='w-[1rem] h-[1rem]' />}
+                            <p className=' ml-[2px]'>{i.likes}</p>
                         </div>
-                    )}
-                    {post.type === 'working-on-b2b' && (
-                        <div className="h-48 flex items-center justify-center">
-                            <img src={post.image} alt={post.title} className="max-h-full max-w-full" />
-                        </div>
-                    )}
-                    {post.type === 'parachute' && (
-                        <div className="relative h-48">
-                            <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
-                        </div>
-                    )}
-                    <div className="p-4">
-                        <h3 className="text-lg font-medium">{post.title}</h3>
-                        <div className="flex items-center mt-2">
-                            <span className="text-gray-500 text-sm">{post.likes} likes</span>
-                        </div>
+                        <img src={i.mediaFiles[0]} alt="images" className='h-full w-full rounded-[0.75rem] object-cover' />
                     </div>
-                </div>
-            ))}
-        </div>
+                )
+            })}
+
+        </div >
+
     );
 };
 
