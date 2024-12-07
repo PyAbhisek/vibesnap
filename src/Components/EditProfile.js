@@ -257,6 +257,7 @@ const EditProfile = () => {
                         name="bio"
                         value={userInput.bio}
                         onChange={(e) => setUserInput({ ...userInput, bio: e.target.value })}
+                        maxLength={150}
                         className="border-b-[0.4px] w-full border-black text-[0.87rem] leading-[1.24rem] font-semibold font-kumbh"
                     />
                 </div>
