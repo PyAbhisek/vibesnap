@@ -47,11 +47,11 @@ const UserProfile = () => {
                 <div className="mt-[1.5rem]">
                     <p className="font-karla font-semibold text-[1.125rem] leading-[1.3rem] text-[#000]">My Posts</p>
                     <PostsSection />
-                    <div onClick={newPost}
-                        className="rounded-full absolute bottom-[1.75rem] right-[1rem] shadow-lg shadow-[#c3b7b7] flex justify-center items-center  bg-black z-[100] h-[3.125rem] w-[3.125rem]">
-                        <img src={plusIcon} alt="plusICon" className="w-[1rem] h-[1rem] " />
-                    </div>
                 </div>
+            </div>
+            <div onClick={newPost}
+                className="rounded-full fixed bottom-[1.75rem] right-[1rem] shadow-lg shadow-[#c3b7b7] flex justify-center items-center  bg-black z-[100] h-[3.125rem] w-[3.125rem]">
+                <img src={plusIcon} alt="plusICon" className="w-[1rem] h-[1rem] " />
             </div>
 
         </>
