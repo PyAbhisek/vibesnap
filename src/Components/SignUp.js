@@ -1,29 +1,53 @@
-import vibeSnapLogo from '../Assests/vibeSnapLogo.svg'
-import googleLogo from '../Assests/google.svg'
-import background from "../Assests/backgroung.svg"
-import { signInWithPopup } from 'firebase/auth'
-import { auth, googleProvider } from '../Services/Firebase'
-import { useContext, useEffect } from 'react'
-import { AppContext } from '../Context/AppContextProvider'
+import vibeSnapLogo from '../Assests/vibeSnapLogo.svg';
+import googleLogo from '../Assests/google.svg';
+import background from "../Assests/backgroung.svg";
+import { signInWithPopup } from 'firebase/auth';
+import { auth, googleProvider } from '../Services/Firebase';
+import { useContext, useEffect } from 'react';
+import { AppContext } from '../Context/AppContextProvider';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { db } from '../Services/Firebase';  // Import Firestore instance
+
 const SignUp = () => {
-    const context = useContext(AppContext)
+    const context = useContext(AppContext);
 
     if (!context) {
-        throw new Error("AppContext must be used within a AppContextProvider");
+        throw new Error("AppContext must be used within an AppContextProvider");
     }
 
-    const { setUserInfo } = context
+    const { setUserInfo } = context;
 
     const handleSignUp = async () => {
         try {
             const result = await signInWithPopup(auth, googleProvider);
             const user = result.user;
+
             if (user) {
+                // Set user data in sessionStorage
                 window.sessionStorage.setItem("user", JSON.stringify(user));
-                setUserInfo(user)
+                setUserInfo(user);
+
+                // Create a profile document for the user in Firestore
+                const userRef = doc(db, 'users', user.uid);
+
+                // Check if user already exists in Firestore
+                const userDoc = await getDoc(userRef);
+                if (!userDoc.exists()) {
+                    // Create a new user profile document if not exists
+                    await setDoc(userRef, {
+                        name: user.displayName || 'Anonymous',
+                        email: user.email || 'N/A',
+                        profilePic: user.photoURL || '',
+                        coverPic: '',
+                        description: '',
+                    });
+                    console.log('Profile created for user:', user.uid);
+                } else {
+                    console.log('User profile already exists');
+                }
+
                 const currentDate = new Date().getTime();
                 window.sessionStorage.setItem("lastLoginDate", currentDate);
-
             }
         } catch (error) {
             console.error("Error during sign-in:", error);
@@ -42,7 +66,6 @@ const SignUp = () => {
             }
         }
     }, []);
-
 
     return (
         <>
@@ -66,7 +89,7 @@ const SignUp = () => {
                 </div>
             </div>
         </>
-    )
+    );
 }
 
-export default SignUp
+export default SignUp;
