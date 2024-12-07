@@ -35,7 +35,7 @@ const PostsSection = () => {
     }, []);
 
     return (
-        <div className="grid grid-cols-2 gap-[0.75rem] mt-[0.68rem] bg-gray-50">
+        <div className="grid grid-cols-2 gap-[0.75rem] mt-[0.68rem]">
             {userFeed.map((i) => {
                 return (
                     <div className=" relative w-full h-[15rem] rounded-[0.75rem] bg-[#8f8f8f]">

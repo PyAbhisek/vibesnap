@@ -44,7 +44,7 @@ const UserProfile = () => {
                 <p className="text-[1.5rem] leading-[1.75rem] font-extrabold font-karla">{userInfo?.Name || userInfo?.displayName}</p>
                 <p className="leading-[1.08rem] mt-[0.62rem] text-[0.875rem] font-kumbh">{userInfo?.description}</p>
                 {/* My Posts */}
-                <div className="mt-[1.5rem]">
+                <div className="mt-[1.5rem] mb-[1rem]">
                     <p className="font-karla font-semibold text-[1.125rem] leading-[1.3rem] text-[#000]">My Posts</p>
                     <PostsSection />
                 </div>
