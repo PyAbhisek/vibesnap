@@ -13,10 +13,10 @@ const FeedPosts = () => {
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
     const [showSharePopup, setShowSharePopup] = useState(false);
+    const [selectedPostUrl, setSelectedPostUrl] = useState("");
 
     const context = useContext(AppContext);
-    if (!context) throw new Error("AppContext must be used within a AppContextProvider");
-
+    if (!context) throw new Error("AppContext must be used within an AppContextProvider");
 
     const fetchPosts = async () => {
         try {
@@ -81,7 +81,9 @@ const FeedPosts = () => {
         }
     }, [showSharePopup]);
 
-    const share = () => {
+    const share = (postId) => {
+        const postUrl = `/post/${postId}`;
+        setSelectedPostUrl(postUrl);
         setShowSharePopup(true);
     };
 
@@ -100,12 +102,12 @@ const FeedPosts = () => {
             : `${differenceInHours} ${differenceInHours === 1 ? "hour" : "hours"} ago`;
     };
 
-
     return (
         <div>
             {postData.map((post) => (
                 <div
                     className={`border w-auto mr-[1rem] relative px-[0.75rem] h-[21.3rem] mb-[10px] rounded-[1.6rem] bg-[#F7EBFF] flex flex-col`}
+                    key={post.id}
                 >
                     <div className="flex items-center h-[3.125rem] mt-[0.75rem]">
                         <img
@@ -153,7 +155,7 @@ const FeedPosts = () => {
                             </p>
                         </div>
                         <div
-                            onClick={share}
+                            onClick={() => share(post.id)}
                             className="bottom-[0.75rem] right-[0.75rem] flex bg-[#00000012] rounded-[1.8rem] py-[0.43rem] px-[1.1rem]"
                         >
                             <img src={shareIcon} alt="share" className="w-[1rem]" />
@@ -164,7 +166,7 @@ const FeedPosts = () => {
                     </div>
                 </div>
             ))}
-            {showSharePopup && <SharePopup onClose={() => setShowSharePopup(false)} />}
+            {showSharePopup && <SharePopup onClose={() => setShowSharePopup(false)} postUrl={selectedPostUrl} />}
 
             {loading && <div className="text-center my-4">Loading more posts...</div>}
             {!hasMore && <div className="text-center my-4">No more posts to load</div>}

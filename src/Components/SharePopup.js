@@ -9,8 +9,10 @@ import twitter from "../Assests/twitter.svg";
 import { useState } from "react";
 import copy from "../Assests/copy.svg";
 
-const SharePopup = ({ onClose }) => {
-    const url = "https://www.arnav/feed/post-299";
+
+const SharePopup = ({ onClose, postUrl }) => {
+    const baseUrl = window.location.origin;
+    const url = `${baseUrl}${postUrl}`;
 
     const socialMedia = [
         {
