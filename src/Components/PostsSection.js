@@ -34,11 +34,14 @@ const PostsSection = () => {
         fetchPosts();
     }, []);
 
+    const isVideo = (url) => {
+        return /\.(mp4|webm|ogg|mov)$/i.test(url);
+    };
     return (
         <div className="grid grid-cols-2 gap-[0.75rem] mt-[0.68rem]">
             {userFeed.map((i) => {
                 return (
-                    <div className=" relative w-full h-[15rem] rounded-[0.75rem] bg-[#8f8f8f]">
+                    <div className=" relative w-full h-[15rem] rounded-[0.75rem] bg-[#ffffff]">
                         {i.mediaFiles.length > 0 && (
                             <div className="absolute top-2 right-2 z-10 bg-white bg-opacity-60 text-black w-auto h-auto px-[7px] py-[3px] rounded-[0.6rem] text-sm font-semibold">
                                 1 / {i.mediaFiles.length}
@@ -53,7 +56,20 @@ const PostsSection = () => {
                             {i.likes > 0 && <img src={heartIcon} alt="hearticon" className='w-[1rem] h-[1rem]' />}
                             <p className=' ml-[2px]'>{i.likes}</p>
                         </div>
-                        <img src={i.mediaFiles[0]} alt="images" className='h-full w-full rounded-[0.75rem] object-cover' />
+                        {isVideo(i.mediaFiles[0]) ? (
+                            <video
+                                src={i.mediaFiles[0]}
+                                className="h-full w-full rounded-[0.75rem] object-cover"
+                                autoPlay
+                                muted
+                            />
+                        ) : (
+                            <img
+                                src={i.mediaFiles[0]}
+                                alt="images"
+                                className="h-full w-full rounded-[0.75rem] object-cover"
+                            />
+                        )}
                     </div>
                 )
             })}
