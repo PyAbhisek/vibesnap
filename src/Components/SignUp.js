@@ -41,9 +41,11 @@ const SignUp = () => {
                         coverPic: '',
                         description: '',
                     });
-                    console.log('Profile created for user:', user.uid);
                 } else {
-                    console.log('User profile already exists');
+                    const userData = userDoc.data();
+                    console.log('User profile fetched from Firestore:', userData);
+                    window.sessionStorage.setItem("user", JSON.stringify({ ...user, ...userData }));
+                    setUserInfo({ ...user, ...userData });
                 }
 
                 const currentDate = new Date().getTime();

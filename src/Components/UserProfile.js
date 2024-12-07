@@ -23,14 +23,14 @@ const UserProfile = () => {
     return (
         <>
             <div className="flex flex-col">
-                <div className="w-[100%] relative h-[30%] rounded-b-[1.25rem]">
-                    <img src={userInfo.coverPhotoURL || coverPhoto} alt="coverPhoto" className="h-[30%] w-[100%]" />
+                <div className="w-[100%] relative h-[12rem]  rounded-b-[1.25rem]">
+                    <img src={userInfo?.coverPhotoURL || coverPhoto} alt="coverPhoto" className="w-full h-full object-cover" />
                     <button className="absolute top-[1.5rem] left-[1.4rem] flex" onClick={() => navigate("/feed")}>
                         <img src={backArrow} alt="backArrow" className="w-[1.6rem] h-auto" />
                     </button>
                     <div className="absolute bottom-[-20.5%] z-[101] left-[1rem]">
                         <div className="relative">
-                            <img src={userInfo.photoURL} referrerPolicy="no-referrer" alt="userPic" className="w-[7rem] h-[7rem] rounded-full" />
+                            <img src={userInfo?.photoURL} referrerPolicy="no-referrer" alt="userPic" className="w-[7rem] h-[7rem] rounded-full" />
                         </div>
                     </div>
                     <input type="file" id="profilePicInput" className="hidden" />
@@ -41,8 +41,8 @@ const UserProfile = () => {
                 <p className="leading-[0.87rem] font-karla text-[0.75rem] font-bold flex justify-center items-center">Edit Profile</p>
             </div>
             <div className="mt-[1.5rem] ml-[0.93rem] mr-[1rem] ">
-                <p className="text-[1.5rem] leading-[1.75rem] font-extrabold font-karla">{userInfo?.displayName}</p>
-                <p className="leading-[1.08rem] mt-[0.62rem] text-[0.875rem] font-kumbh">Just someone who loves designing, sketching, and finding beauty in the little things 💕</p>
+                <p className="text-[1.5rem] leading-[1.75rem] font-extrabold font-karla">{userInfo?.Name || userInfo?.displayName}</p>
+                <p className="leading-[1.08rem] mt-[0.62rem] text-[0.875rem] font-kumbh">{userInfo?.description}</p>
                 {/* My Posts */}
                 <div className="mt-[1.5rem]">
                     <p className="font-karla font-semibold text-[1.125rem] leading-[1.3rem] text-[#000]">My Posts</p>

@@ -16,7 +16,7 @@ const Feed = () => {
                 <img src={userInfo?.photoURL} alt="dp" className="w-[3.125rem] h-[3.125rem] rounded-full" />
                 <div className="ml-[0.625rem] flex flex-col   ">
                     <p className="text-[0.625rem] leading-[0.77rem] font-kumbh text-[#00000054]">Welcome Back,</p>
-                    <p className="leading-[1.24rem] text-[1rem] font-kumbh font-semibold"> {userInfo?.displayName?.charAt(0).toUpperCase() + userInfo?.displayName?.slice(1)}</p>
+                    <p className="leading-[1.24rem] text-[1rem] font-kumbh font-semibold"> {userInfo?.Name || userInfo?.displayName}</p>
 
                 </div>
 

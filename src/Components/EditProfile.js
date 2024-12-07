@@ -28,8 +28,6 @@ const EditProfile = () => {
     const [coverPhotoPreview, setCoverPhotoPreview] = useState(null);
     const [profilePhotoPreview, setProfilePhotoPreview] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [coverPhotoURL, setCoverPhotoURL] = useState(null);
-    const [profilePhotoURL, setProfilePhotoURL] = useState(null);
     const navigate = useNavigate();
 
     if (!context) {
@@ -187,7 +185,7 @@ const EditProfile = () => {
                 {/* Cover Photo Section */}
                 <div className="w-[100%] relative h-[12rem] rounded-b-[1.25rem]">
                     <img
-                        src={coverPhotoPreview || userInput?.coverPhoto || userInfo.coverPhotoURL}
+                        src={coverPhotoPreview || userInput?.coverPhoto || userInfo.coverPhotoURL || coverPhoto}
                         alt="coverPhoto"
                         className="w-full h-full object-cover"
                     />
