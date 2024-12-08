@@ -187,7 +187,7 @@ const CreatePost = () => {
                             </div>
                         )}
                         <input
-                            // ref={fileInputRef}
+                            ref={fileInputRef}
                             id="file-input"
                             type="file"
                             accept="image/*, video/*"
