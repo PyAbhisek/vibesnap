@@ -1,5 +1,5 @@
 import backArrow from "../Assests/blackBackArrow.svg";
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 import { AppContext } from "../Context/AppContextProvider";
 import { useNavigate } from "react-router-dom";
 import camera from "../Assests/camera.svg";
@@ -22,6 +22,12 @@ const CreatePost = () => {
     const navigate = useNavigate();
 
     const context = useContext(AppContext);
+
+    const fileInputRef = useRef(null);
+
+    const handleFileContainerClick = () => {
+        fileInputRef.current?.click();
+    };
 
     if (!context) {
         throw new Error("AppContext must be used within a AppContextProvider");
@@ -135,7 +141,8 @@ const CreatePost = () => {
                     <p className="font-extrabold font-karla leading-[1.46rem] text-[1.25rem] ml-[0.8rem]">New Post</p>
                 </button>
                 <div className="flex items-center justify-center mt-[6rem]">
-                    <div className="mx-[2.6rem] w-full flex items-center justify-center aspect-square rounded-[0.75rem] bg-[#d3d3d3] relative overflow-hidden">
+                    <div className="mx-[2.6rem] w-full flex items-center justify-center aspect-square rounded-[0.75rem] bg-[#d3d3d3] relative overflow-hidden"
+                        onClick={handleFileContainerClick}>
                         {selectedFiles.length > 0 && (
                             <div className="absolute top-2 right-2 z-10 bg-white bg-opacity-60 text-black w-auto h-auto px-[7px] py-[3px] rounded-[0.6rem] text-sm font-semibold">
                                 {currentSlide + 1} / {selectedFiles.length}
@@ -171,6 +178,7 @@ const CreatePost = () => {
                             </div>
                         )}
                         <input
+                            ref={fileInputRef}
                             id="file-input"
                             type="file"
                             accept="image/*, video/*"
