@@ -20,18 +20,18 @@ function App() {
   const isUserLoggedIn = Object.keys(userInfo).length > 0;
 
   useEffect(() => {
-    const storedUser = window.sessionStorage.getItem("user");
+    const storedUser = localStorage.getItem("user");
     if (storedUser) {
       const user = JSON.parse(storedUser);
       setUserInfo(user);
     }
 
-    const lastLoginDate = window.sessionStorage.getItem("lastLoginDate");
+    const lastLoginDate = localStorage.getItem("lastLoginDate");
     if (lastLoginDate) {
       const currentDate = new Date().getTime();
       const sevenDaysInMilliseconds = 7 * 24 * 60 * 60 * 1000;
       if (currentDate - lastLoginDate > sevenDaysInMilliseconds) {
-        window.sessionStorage.clear();
+        localStorage.clear();
         setUserInfo({});
       }
     }

@@ -99,7 +99,7 @@ const EmailSignUp = () => {
                 <div className="flex justify-between items-center">
                     <button
                         type="submit"
-                        className="mt-2 px-4 py-2 bg-blue-500 text-white rounded font-bold"
+                        className="mt-2 px-4 py-2 bg-[#292929] text-white rounded font-bold"
                     >
                         {!isSignUp ? "Login" : "Sign Up"}
                     </button>
