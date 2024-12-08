@@ -72,7 +72,7 @@ const CreatePost = () => {
 
 
     const handleCreatePost = async () => {
-        if (selectedFiles.length === 0 || !userInfo?.uid) {
+        if (!userInfo?.uid) {
             alert('Please select files and ensure you are logged in');
             return;
         }
@@ -202,7 +202,7 @@ const CreatePost = () => {
             <div className="absolute top-[90%] left-0 right-0 flex justify-center items-center">
                 <button
                     onClick={handleCreatePost}
-                    disabled={isLoading || selectedFiles.length === 0}
+                    disabled={isLoading}
                     className="bg-[#000] text-white px-[1rem] py-[0.31rem] font-karla h-[3rem] font-bold rounded-[2.25rem] w-[20.5rem]"
                 >
                     {isLoading ? "Creating..." : "Create"}
