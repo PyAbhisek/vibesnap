@@ -72,10 +72,15 @@ const CreatePost = () => {
 
 
     const handleCreatePost = async () => {
-        if (!userInfo?.uid) {
-            alert('Please select files and ensure you are logged in');
+        if (!userInfo || !userInfo.uid) {
+            alert('Please log in to create a post');
             return;
         }
+
+        // if (selectedFiles.length === 0) {
+        //     alert('Please select at least one image or video');
+        //     return;
+        // }
 
         setIsLoading(true);
 
@@ -85,16 +90,16 @@ const CreatePost = () => {
                 selectedFiles.map(file => uploadFileToSupabase(file))
             );
 
-            // Create post document
+            // Create post document with fallback values
             const postId = uuidv4();
             const postData = {
                 postId,
                 userId: userInfo.uid,
-                description: postDescription,
+                description: postDescription || '',
                 mediaFiles: mediaUrls,
-                profilePicture: userInfo?.photoURL,
-                name: userInfo?.Name,
-                likes: 100,
+                profilePicture: userInfo.photoURL || '',
+                name: userInfo.Name || userInfo.displayName || 'Anonymous User',
+                likes: 0,
                 createdAt: serverTimestamp(),
             };
 
@@ -114,7 +119,7 @@ const CreatePost = () => {
 
         } catch (error) {
             console.error('Post creation error:', error);
-            alert('Failed to create post');
+            alert(`Failed to create post: ${error.message}`);
             setIsLoading(false);
         }
     };
