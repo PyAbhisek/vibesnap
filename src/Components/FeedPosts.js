@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useCallback } from "react";
+import React, { useEffect, useState, useContext, useCallback, useRef } from "react";
 import { AppContext } from "../Context/AppContextProvider";
 import filledHearIcon from "../Assests/filledHearIcon.svg";
 import shareIcon from "../Assests/shareIcon.svg";
@@ -14,6 +14,8 @@ const FeedPosts = () => {
     const [hasMore, setHasMore] = useState(true);
     const [showSharePopup, setShowSharePopup] = useState(false);
     const [selectedPostUrl, setSelectedPostUrl] = useState("");
+
+    const videoRefs = useRef(new Map());
 
     const context = useContext(AppContext);
     if (!context) throw new Error("AppContext must be used within an AppContextProvider");
@@ -102,6 +104,34 @@ const FeedPosts = () => {
             : `${differenceInHours} ${differenceInHours === 1 ? "hour" : "hours"} ago`;
     };
 
+    // Handle Intersection Observer for Videos
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    const video = entry.target;
+                    if (entry.isIntersecting) {
+                        video.play();
+                    } else {
+                        video.pause();
+                    }
+                });
+            },
+            { threshold: 0.5 } // Trigger when 50% of the video is visible
+        );
+
+        // Attach observer to all videos
+        videoRefs.current.forEach((video) => {
+            if (video) observer.observe(video);
+        });
+
+        return () => {
+            videoRefs.current.forEach((video) => {
+                if (video) observer.unobserve(video);
+            });
+        };
+    }, [postData]);
+
     return (
         <div>
             {postData.map((post) => (
@@ -132,21 +162,27 @@ const FeedPosts = () => {
                             #NYC #Travel
                         </span>
                     </div>
-                    {isVideo(post.mediaFiles[0]) ? (
-                        <video
-                            src={post.mediaFiles[0]}
-                            className="w-[100%] h-[10.5rem] object-cover bg-white rounded-[0.75rem]"
-                            autoPlay
-                            muted
-                            loop
-                        />
-                    ) : (
-                        <img
-                            src={post.mediaFiles[0]}
-                            alt="images"
-                            className="w-[100%] h-[10.5rem] object-cover bg-white rounded-[0.75rem]"
-                        />
-                    )}
+                    <div className="flex gap-2 overflow-x-auto no-scrollbar">
+                        {post?.mediaFiles?.map((media, index) => (
+                            isVideo(media) ? (
+                                <video
+                                    key={index}
+                                    ref={(el) => videoRefs.current.set(`${post.id}-${index}`, el)}
+                                    src={media}
+                                    className="w-[100%] h-[10.5rem] shrink-0 object-cover bg-white rounded-[0.75rem]"
+                                    muted
+                                    loop
+                                />
+                            ) : (
+                                <img
+                                    key={index}
+                                    src={media}
+                                    alt={`media-${index}`}
+                                    className="w-[100%] h-[10.5rem] shrink-0 object-cover bg-white rounded-[0.75rem]"
+                                />
+                            )
+                        ))}
+                    </div>
                     <div className="mt-[1rem] flex h-auto justify-between items-center">
                         <div className="flex">
                             <img src={filledHearIcon} alt="dp" className="w-[1.1rem]" />
@@ -166,6 +202,7 @@ const FeedPosts = () => {
                     </div>
                 </div>
             ))}
+
             {showSharePopup && <SharePopup onClose={() => setShowSharePopup(false)} postUrl={selectedPostUrl} />}
 
             {loading && <div className="text-center my-4">Loading more posts...</div>}

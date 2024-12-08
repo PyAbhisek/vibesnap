@@ -22,6 +22,14 @@ textarea:focus {
     outline: none;
     box-shadow: none;
 }
+.no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
 
 .App-header {
     background-color: #282c34;
