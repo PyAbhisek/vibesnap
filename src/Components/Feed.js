@@ -14,7 +14,7 @@ const Feed = () => {
 
     const logout = () => {
         setUserInfo({});
-        window.sessionStorage.clear();
+        localStorage.clear();
         navigate('/');
     }
     return (
