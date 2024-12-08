@@ -149,9 +149,9 @@ const EditProfile = () => {
             context.updateUserInfo(updatedData);
 
             // Update sessionStorage user object
-            const currentUser = JSON.parse(window.sessionStorage.getItem("user") || '{}');
+            const currentUser = JSON.parse(localStorage.getItem("user") || '{}');
             const updatedUser = { ...currentUser, ...updatedData };
-            window.sessionStorage.setItem("user", JSON.stringify(updatedUser));
+            localStorage.setItem("user", JSON.stringify(updatedUser));
 
             navigate("/profile")
             setProfileUpdated(true)

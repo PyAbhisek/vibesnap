@@ -58,7 +58,7 @@ const EmailSignUp = () => {
                 const userRef = doc(db, 'users', user?.user.uid);
                 const userDoc = await getDoc(userRef);
                 const userData = userDoc.data();
-                window.sessionStorage.setItem("user", JSON.stringify({ ...user?.user, ...userData }));
+                localStorage.setItem("user", JSON.stringify({ ...user?.user, ...userData }));
                 setUserInfo({ ...user?.user, ...userData });
                 navigate("/feed")
 

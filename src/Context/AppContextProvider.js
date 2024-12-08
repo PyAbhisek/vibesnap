@@ -4,14 +4,14 @@ export const AppContext = createContext()
 
 export const AppContextProvider = ({ children }) => {
     const [userInfo, setUserInfo] = useState(() => {
-        const storedUser = window.sessionStorage.getItem("user");
+        const storedUser = localStorage.getItem("user");
         return storedUser ? JSON.parse(storedUser) : {};
     });
 
     const updateUserInfo = (updatedData) => {
         setUserInfo((prevState) => {
             const newState = { ...prevState, ...updatedData };
-            window.sessionStorage.setItem("user", JSON.stringify(newState));
+            localStorage.setItem("user", JSON.stringify(newState));
 
             return newState;
         });
@@ -19,8 +19,8 @@ export const AppContextProvider = ({ children }) => {
 
     const clearUserInfo = () => {
         setUserInfo({});
-        window.sessionStorage.removeItem("user");
-        window.sessionStorage.removeItem("lastLoginDate");
+        localStorage.removeItem("user");
+        localStorage.removeItem("lastLoginDate");
     };
 
     return (

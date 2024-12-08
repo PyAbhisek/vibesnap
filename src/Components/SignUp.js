@@ -25,7 +25,7 @@ const SignUp = () => {
 
             if (user) {
                 // Set user data in sessionStorage
-                window.sessionStorage.setItem("user", JSON.stringify(user));
+                localStorage.setItem("user", JSON.stringify(user));
                 setUserInfo(user);
 
                 // Create a profile document for the user in Firestore
@@ -45,12 +45,12 @@ const SignUp = () => {
                 } else {
                     const userData = userDoc.data();
                     console.log('User profile fetched from Firestore:', userData);
-                    window.sessionStorage.setItem("user", JSON.stringify({ ...user, ...userData }));
+                    localStorage.setItem("user", JSON.stringify({ ...user, ...userData }));
                     setUserInfo({ ...user, ...userData });
                 }
 
                 const currentDate = new Date().getTime();
-                window.sessionStorage.setItem("lastLoginDate", currentDate);
+                localStorage.setItem("lastLoginDate", currentDate);
             }
         } catch (error) {
             console.error("Error during sign-in:", error);
@@ -58,14 +58,14 @@ const SignUp = () => {
     };
 
     useEffect(() => {
-        const lastLoginDate = window.sessionStorage.getItem("lastLoginDate");
+        const lastLoginDate = localStorage.getItem("lastLoginDate");
 
         if (lastLoginDate) {
             const currentDate = new Date().getTime();
             const sevenDaysInMilliseconds = 7 * 24 * 60 * 60 * 1000;
 
             if (currentDate - lastLoginDate > sevenDaysInMilliseconds) {
-                window.sessionStorage.clear();
+                localStorage.clear();
             }
         }
     }, []);
