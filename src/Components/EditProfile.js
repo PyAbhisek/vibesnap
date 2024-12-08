@@ -225,7 +225,7 @@ const EditProfile = () => {
                                 src={profilePhotoPreview || userInput?.profilePhoto || userInfo.photoURL}
                                 referrerPolicy="no-referrer"
                                 alt="userPic"
-                                className="w-[7rem] h-[7rem] rounded-full"
+                                className="w-[7rem] h-[7rem] bg-white rounded-full"
                             />
                             <button
                                 onClick={() => document.getElementById("profilePicInput").click()}

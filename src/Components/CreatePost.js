@@ -77,10 +77,10 @@ const CreatePost = () => {
             return;
         }
 
-        // if (selectedFiles.length === 0) {
-        //     alert('Please select at least one image or video');
-        //     return;
-        // }
+        if (selectedFiles.length === 0) {
+            alert('Please select at least one image or video');
+            return;
+        }
 
         setIsLoading(true);
 
@@ -199,6 +199,7 @@ const CreatePost = () => {
                         name="NewPost"
                         placeholder="What's on your mind"
                         value={postDescription}
+                        required
                         onChange={(e) => setPostDescription(e.target.value)}
                         className="border-b-[0.4px] w-full border-black text-[0.87rem] leading-[1.24rem] font-semibold font-kumbh"
                     />

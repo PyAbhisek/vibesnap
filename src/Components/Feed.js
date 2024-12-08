@@ -21,7 +21,7 @@ const Feed = () => {
         <>
             <div className="flex items-center justify-between h-[3.125rem] mx-[1rem] mt-[1rem] ">
                 <div className="flex  items-center " onClick={() => { navigate("/profile") }}>
-                    <img src={userInfo?.photoURL} alt="dp" className="w-[3.125rem] h-[3.125rem] rounded-full" />
+                    <img src={userInfo?.photoURL} alt="dp" className="w-[3.125rem] h-[3.125rem] rounded-full object-cover" />
                     <div className="ml-[0.625rem] flex flex-col   ">
                         <p className="text-[0.625rem] leading-[0.77rem] font-kumbh text-[#00000054]">Welcome Back,</p>
                         <p className="leading-[1.24rem] text-[1rem] font-kumbh font-semibold"> {userInfo?.Name || userInfo?.displayName}</p>

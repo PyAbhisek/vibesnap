@@ -49,9 +49,9 @@ const UserProfile = () => {
                     <button className="absolute top-[1.5rem] left-[1.4rem] flex" onClick={() => navigate("/feed")}>
                         <img src={backArrow} alt="backArrow" className="w-[1.6rem] h-auto" />
                     </button>
-                    <div className="absolute bottom-[-20.5%] z-[101] left-[1rem]">
-                        <div className="relative">
-                            <img src={userInfo?.photoURL} referrerPolicy="no-referrer" alt="userPic" className="w-[7rem] h-[7rem] rounded-full" />
+                    <div className="absolute bottom-[-20.5%]  z-[101] left-[1rem]">
+                        <div className="relative ">
+                            <img src={userInfo?.photoURL} referrerPolicy="no-referrer" alt="userPic" className="w-[7rem] bg-white h-[7rem] rounded-full" />
                         </div>
                     </div>
                     <input type="file" id="profilePicInput" className="hidden" />
