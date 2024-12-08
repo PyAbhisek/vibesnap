@@ -141,8 +141,7 @@ const CreatePost = () => {
                     <p className="font-extrabold font-karla leading-[1.46rem] text-[1.25rem] ml-[0.8rem]">New Post</p>
                 </button>
                 <div className="flex items-center justify-center mt-[6rem]">
-                    <div className="mx-[2.6rem] w-full flex items-center justify-center aspect-square rounded-[0.75rem] bg-[#d3d3d3] relative overflow-hidden"
-                        onClick={handleFileContainerClick}>
+                    <div className="mx-[2.6rem] w-full flex items-center justify-center aspect-square rounded-[0.75rem] bg-[#d3d3d3] relative overflow-hidden">
                         {selectedFiles.length > 0 && (
                             <div className="absolute top-2 right-2 z-10 bg-white bg-opacity-60 text-black w-auto h-auto px-[7px] py-[3px] rounded-[0.6rem] text-sm font-semibold">
                                 {currentSlide + 1} / {selectedFiles.length}
@@ -170,15 +169,25 @@ const CreatePost = () => {
                             )
                         ) : (
                             <div className="w-full h-full relative">
-                                <img
-                                    src={URL.createObjectURL(selectedFiles[currentSlide])}
-                                    alt={`Slide ${currentSlide + 1}`}
-                                    className="w-full h-full object-cover rounded-[0.75rem]"
-                                />
+                                {isVideo(selectedFiles[currentSlide]) ? (
+                                    <video
+                                        src={URL.createObjectURL(selectedFiles[currentSlide])}
+                                        alt={`Slide ${currentSlide + 1}`}
+                                        className="w-full h-full object-cover rounded-[0.75rem]"
+                                        autoPlay
+                                        muted={false}
+                                    />
+                                ) : (
+                                    <img
+                                        src={URL.createObjectURL(selectedFiles[currentSlide])}
+                                        alt={`Slide ${currentSlide + 1}`}
+                                        className="w-full h-full object-cover rounded-[0.75rem]"
+                                    />
+                                )}
                             </div>
                         )}
                         <input
-                            ref={fileInputRef}
+                            // ref={fileInputRef}
                             id="file-input"
                             type="file"
                             accept="image/*, video/*"
