@@ -145,8 +145,15 @@ const EditProfile = () => {
             const userRef = doc(db, "users", userInfo.uid);
             await updateDoc(userRef, updatedData);
 
-            // Update local context
+            // Update local context and sessionStorage
             context.updateUserInfo(updatedData);
+
+            // Update sessionStorage user object
+            const currentUser = JSON.parse(window.sessionStorage.getItem("user") || '{}');
+            const updatedUser = { ...currentUser, ...updatedData };
+            window.sessionStorage.setItem("user", JSON.stringify(updatedUser));
+
+            navigate("/profile")
             setProfileUpdated(true)
         } catch (error) {
             console.error("Error updating profile:", error);
@@ -170,14 +177,14 @@ const EditProfile = () => {
         }
     };
 
-    setTimeout(() => {
-        if (profileUpdated) {
-            setProfileUpdated(false)
-        }
-        if (errorProfileUpdated) {
-            setErrorProfileUpdated(false)
-        }
-    }, 1000)
+    // setTimeout(() => {
+    //     if (profileUpdated) {
+    //         setProfileUpdated(false)
+    //     }
+    //     if (errorProfileUpdated) {
+    //         setErrorProfileUpdated(false)
+    //     }
+    // }, 1000)
 
     return (
         <>

@@ -1,11 +1,13 @@
 import coverPhoto from "../Assests/userDummyCoverPhoto.svg";
 import backArrow from "../Assests/backArrow.svg";
 import pencil from "../Assests/pencil.svg";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../Context/AppContextProvider";
 import PostsSection from "./PostsSection";
 import plusIcon from "../Assests/plus.svg"
 import { useNavigate } from 'react-router-dom';
+import { doc, updateDoc, setDoc, getDoc } from "firebase/firestore";
+import { db, storage } from "../Services/Firebase";
 const UserProfile = () => {
     const context = useContext(AppContext);
     const navigate = useNavigate()
@@ -20,6 +22,25 @@ const UserProfile = () => {
     const newPost = () => {
         navigate("/createpost")
     }
+    useEffect(() => {
+        const syncUserProfile = async () => {
+            try {
+                const userDocRef = doc(db, "users", userInfo.uid);
+                const userDocSnap = await getDoc(userDocRef);
+
+                if (userDocSnap.exists()) {
+                    const firestoreUserData = userDocSnap.data();
+                    context.updateUserInfo(firestoreUserData);
+                }
+            } catch (error) {
+                console.error("Error syncing user profile:", error);
+            }
+        };
+
+        if (userInfo.uid) {
+            syncUserProfile();
+        }
+    }, [userInfo.uid, context]);
     return (
         <>
             <div className="flex flex-col">
