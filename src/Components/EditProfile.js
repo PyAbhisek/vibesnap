@@ -215,6 +215,7 @@ const EditProfile = () => {
                         type="file"
                         id="coverPicInput"
                         className="hidden"
+                        accept="image/*"
                         onChange={(e) => handleFileChange(e, "cover")}
                     />
 
@@ -239,6 +240,7 @@ const EditProfile = () => {
                         type="file"
                         id="profilePicInput"
                         className="hidden"
+                        accept="image/*"
                         onChange={(e) => handleFileChange(e, "profile")}
                     />
                 </div>
