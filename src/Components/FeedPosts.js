@@ -143,6 +143,7 @@ const FeedPosts = () => {
                         <img
                             src={post?.profilePicture}
                             alt="Pic"
+                            loading="lazy"
                             className="w-[3.125rem] h-[3.125rem] rounded-full"
                         />
                         <div className="ml-[0.625rem] flex flex-col">
@@ -177,6 +178,7 @@ const FeedPosts = () => {
                                 <img
                                     key={index}
                                     src={media}
+                                    loading="lazy"
                                     alt={`media-${index}`}
                                     className="w-[100%] h-[10.5rem] shrink-0 object-cover bg-white rounded-[0.75rem]"
                                 />
