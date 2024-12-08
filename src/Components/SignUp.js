@@ -6,7 +6,8 @@ import { auth, googleProvider } from '../Services/Firebase';
 import { useContext, useEffect } from 'react';
 import { AppContext } from '../Context/AppContextProvider';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { db } from '../Services/Firebase';  // Import Firestore instance
+import { db } from '../Services/Firebase';
+import EmailSignUp from './EmailSignUp';
 
 const SignUp = () => {
     const context = useContext(AppContext);
@@ -88,7 +89,9 @@ const SignUp = () => {
                             <p className=' ml-[0.87rem] leading-[1.4rem] font-bold text-[1rem] text-white font-karla mr-[1.18rem]'>Continue with Google</p>
                         </button>
                     </div>
+                    <EmailSignUp />
                 </div>
+
             </div>
         </>
     );

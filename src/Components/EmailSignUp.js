@@ -2,6 +2,8 @@ import { useState, useContext } from "react";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, sendEmailVerification } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../Context/AppContextProvider";
+import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { db } from '../Services/Firebase';
 const EmailSignUp = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -53,8 +55,11 @@ const EmailSignUp = () => {
             }
             else {
                 const user = await signInWithEmailAndPassword(auth, email, password);
-                console.log(user?.user, "user")
-                setUserInfo(user?.user)
+                const userRef = doc(db, 'users', user?.user.uid);
+                const userDoc = await getDoc(userRef);
+                const userData = userDoc.data();
+                window.sessionStorage.setItem("user", JSON.stringify({ ...user?.user, ...userData }));
+                setUserInfo({ ...user?.user, ...userData });
                 navigate("/feed")
 
             }
