@@ -141,7 +141,9 @@ const CreatePost = () => {
                     <p className="font-extrabold font-karla leading-[1.46rem] text-[1.25rem] ml-[0.8rem]">New Post</p>
                 </button>
                 <div className="flex items-center justify-center mt-[6rem]">
-                    <div className="mx-[2.6rem] w-full flex items-center justify-center aspect-square rounded-[0.75rem] bg-[#d3d3d3] relative overflow-hidden">
+                    <div
+                        onClick={handleFileContainerClick}
+                        className="mx-[2.6rem] w-full flex items-center justify-center aspect-square rounded-[0.75rem] bg-[#d3d3d3] relative overflow-hidden">
                         {selectedFiles.length > 0 && (
                             <div className="absolute top-2 right-2 z-10 bg-white bg-opacity-60 text-black w-auto h-auto px-[7px] py-[3px] rounded-[0.6rem] text-sm font-semibold">
                                 {currentSlide + 1} / {selectedFiles.length}
