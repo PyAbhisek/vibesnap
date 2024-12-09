@@ -84,7 +84,7 @@ const Feed = () => {
                             </button>
                             <button
                                 onClick={confirmLogout}
-                                className="bg-[red] text-white  font-karla w-[5rem] py-[0.5rem] rounded hover:bg-red-600"
+                                className="bg-[#292929] text-white  font-karla w-[5rem] py-[0.5rem] rounded hover:bg-red-600"
                             >
                                 Yes
                             </button>
