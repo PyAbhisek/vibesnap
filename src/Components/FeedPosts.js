@@ -134,9 +134,10 @@ const FeedPosts = () => {
 
     return (
         <div>
-            {postData.map((post) => (
+            {postData.map((post, index) => (
                 <div
-                    className={`border w-auto mr-[1rem] relative px-[0.75rem] h-[21.3rem] mb-[10px] rounded-[1.6rem] bg-[#F7EBFF] flex flex-col`}
+                    className={`border w-auto mr-[1rem] relative px-[0.75rem] h-[21.3rem] mb-[10px] rounded-[1.6rem] flex flex-col ${index % 2 === 0 ? 'bg-[#F7EBFF]' : 'bg-[#FFFAEE]'
+                        }`}
                     key={post.id}
                 >
                     <div className="flex items-center h-[3.125rem] mt-[0.75rem]">
