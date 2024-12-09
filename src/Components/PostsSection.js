@@ -61,7 +61,7 @@ const PostsSection = () => {
                             </p>
 
                             <div className="flex absolute bottom-[0.75rem] left-[0.75rem] text-[#706e6e] text-[0.875rem] font-semibold font-kumbh leading-[1rem]">
-                                {i.likes > 0 && <img src={heartIcon} alt="hearticon" className="w-[1rem] h-[1rem]" />}
+                                <img src={heartIcon} alt="hearticon" className="w-[1rem] h-[1rem]" />
                                 <p className="ml-[2px]">{i.likes}</p>
                             </div>
 
