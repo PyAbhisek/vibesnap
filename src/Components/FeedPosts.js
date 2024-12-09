@@ -157,11 +157,24 @@ const FeedPosts = () => {
                     </div>
                     <div className="mt-[0.87rem]">
                         <p className="text-[0.75rem] font-kumbh leading-[0.93rem]">
-                            {post?.description}
+                            {post?.description.split("#")?.[0]}
                         </p>
-                        <span className="text-[0.75rem] font-kumbh leading-[0.93rem] text-[#3C8DFF]">
-                            #NYC #Travel
-                        </span>
+                        <div className="min-h-[0.93rem]">
+                            {
+                                post?.description
+                                    .match(/#[^\s#]+/g)
+                                    ?.map((hashtag, index) => (
+                                        <span
+                                            key={index}
+                                            className="text-[0.75rem] font-kumbh leading-[0.93rem] text-[#3C8DFF] mr-1"
+                                        >
+                                            {hashtag}
+                                        </span>
+                                    ))
+                            }
+                        </div>
+
+
                     </div>
                     <div className="flex gap-2 overflow-x-auto no-scrollbar">
                         {post?.mediaFiles?.map((media, index) => (
