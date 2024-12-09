@@ -144,7 +144,7 @@ const FeedPosts = () => {
                             src={post?.profilePicture}
                             alt="Pic"
                             loading="lazy"
-                            className="w-[3.125rem] h-[3.125rem] rounded-full"
+                            className="w-[3.125rem] h-[3.125rem] object-cover rounded-full"
                         />
                         <div className="ml-[0.625rem] flex flex-col">
                             <p className="font-semibold font-karla text-[1rem] leading-[1.16rem] mb-[1px]">
