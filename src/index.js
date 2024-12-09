@@ -5,15 +5,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AppContextProvider } from './Context/AppContextProvider';
 import { HashRouter } from 'react-router-dom';
-
+import ScreenSizeRestriction from './Components/ScreenSizeRestriction';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <AppContextProvider>
-    <HashRouter>
-      <App />
-    </HashRouter>
+  <ScreenSizeRestriction>
+    <AppContextProvider>
+      <HashRouter>
+        <App />
+      </HashRouter>
 
-  </AppContextProvider>
+    </AppContextProvider>
+  </ScreenSizeRestriction>
 );
 
 // If you want to start measuring performance in your app, pass a function
