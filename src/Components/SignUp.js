@@ -73,7 +73,7 @@ const SignUp = () => {
     return (
         <>
             <div className="h-[100vh]">
-                <div className="h-[63%] "><img src={background} className='w-full object-cover ' /></div>
+                <div className="h-[63%] "><img src={background} className='w-full object-cover md:h-[113%] ' /></div>
                 <div className="h-[37%] z-[100] relative  rounded-t-[3.9rem] bg-[white] flex flex-col items-center ">
                     <div className='flex flex-col justify-center items-center mt-[2.1rem] mx-[2.3rem]'>
                         <div className='flex'>
