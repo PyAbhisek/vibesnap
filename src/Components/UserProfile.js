@@ -51,7 +51,7 @@ const UserProfile = () => {
                     </button>
                     <div className="absolute bottom-[-20.5%]  z-[101] left-[1rem]">
                         <div className="relative ">
-                            <img src={userInfo?.photoURL} referrerPolicy="no-referrer" alt="userPic" className="w-[7rem] bg-white h-[7rem] rounded-full" />
+                            <img src={userInfo?.photoURL} referrerPolicy="no-referrer" alt="userPic" className="w-[7rem] bg-white h-[7rem] object-cover rounded-full" />
                         </div>
                     </div>
                     <input type="file" id="profilePicInput" className="hidden" />

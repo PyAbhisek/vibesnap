@@ -194,6 +194,7 @@ const EditProfile = () => {
                     <img
                         src={coverPhotoPreview || userInput?.coverPhoto || userInfo.coverPhotoURL || coverPhoto}
                         alt="coverPhoto"
+                        loading="lazy"
                         className="w-full h-full object-cover"
                     />
                     <button
@@ -226,7 +227,8 @@ const EditProfile = () => {
                                 src={profilePhotoPreview || userInput?.profilePhoto || userInfo.photoURL}
                                 referrerPolicy="no-referrer"
                                 alt="userPic"
-                                className="w-[7rem] h-[7rem] bg-white rounded-full"
+                                loading="lazy"
+                                className="w-[7rem] h-[7rem] bg-white object-cover rounded-full"
                             />
                             <button
                                 onClick={() => document.getElementById("profilePicInput").click()}
